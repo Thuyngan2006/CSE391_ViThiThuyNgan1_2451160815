@@ -1,0 +1,24 @@
+.about-section{
+    padding: 100px 0;
+}
+
+.about-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.about-image img{
+    width: 100%;
+    border-radius: 50%;
+}
+
+.about-content h2{
+    margin-bottom: 20px;
+}
+
+.lead{
+    font-size: 22px;
+    margin-bottom: 20px;
+}
