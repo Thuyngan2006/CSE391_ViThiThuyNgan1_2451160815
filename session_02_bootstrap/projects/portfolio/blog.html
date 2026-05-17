@@ -48,6 +48,52 @@
                 </p>
                 <p class="card-text">Learn how to build a professional portfolio website using Bootstrap 5 grid system and components.</p>
                 <a href="#" class="btn btn-outline-primary">Read More</a>
+                <div class="card shadow-sm border-0 mb-5">
+              <div class="card-header bg-white fw-bold fs-5">Leave a Comment</div>
+              <div class="card-body p-4">
+                <form id="commentForm">
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label fw-semibold">Name</label>
+                      <input type="text" class="form-control" required placeholder="Your name" />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label fw-semibold">Email</label>
+                      <input type="email" class="form-control" required placeholder="your@email.com" />
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Comment</label>
+                    <textarea class="form-control" rows="4" required placeholder="Write your comment..."></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary"><i class="bi bi-send me-2"></i>Post Comment</button>
+                </form>
+              </div>
+            </div>
+
+            <h5 class="fw-bold mb-4">Comments</h5>
+            <div class="comments-list">
+              <div class="comment-item d-flex gap-3 mb-4">
+                <img src="https://picsum.photos/50/50?random=7" class="rounded-circle flex-shrink-0" width="50" height="50" alt="Avatar" />
+                <div class="flex-grow-1">
+                  <div class="bg-white rounded-3 p-3 shadow-sm">
+                    <h6 class="fw-bold mb-1">John Doe</h6>
+                    <p class="mb-0 text-muted">Great article! Very helpful for beginners learning Bootstrap.</p>
+                  </div>
+                  
+                  <div class="d-flex gap-3 mt-3 ms-4">
+                    <img src="https://picsum.photos/40/40?random=8" class="rounded-circle flex-shrink-0" width="40" height="40" alt="Avatar" />
+                    <div class="flex-grow-1">
+                      <div class="bg-white rounded-3 p-3 shadow-sm border-start border-primary border-3">
+                        <h6 class="fw-bold mb-1 text-primary">Thúy Ngân <span class="badge bg-primary" style="font-size: 0.65rem">Author</span></h6>
+                        <p class="mb-0 text-muted">Thank you John! Glad it helped you.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
               </div>
             </article>
 
