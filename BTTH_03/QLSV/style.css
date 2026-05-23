@@ -79,21 +79,52 @@ table th{
     height:100%;
 
     background:rgba(0,0,0,0.5);
+
+    backdrop-filter:blur(3px);
 }
+/* =====================
+    MODAL CONTENT
+===================== */
 
 .modal-content{
     background:white;
 
-    width:400px;
+    width:450px;
 
-    margin:100px auto;
+    margin:60px auto;
 
-    padding:20px;
+    padding:30px;
 
-    border-radius:10px;
+    border-radius:15px;
 
     position:relative;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+
+    animation:showModal 0.3s ease;
 }
+
+/* =====================
+    ANIMATION
+===================== */
+
+@keyframes showModal{
+
+    from{
+        opacity:0;
+        transform:translateY(-20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* =====================
+    CLOSE BUTTON
+===================== */
 
 .closeBtn{
     position:absolute;
@@ -101,10 +132,20 @@ table th{
     right:15px;
     top:10px;
 
-    font-size:25px;
+    font-size:28px;
 
     cursor:pointer;
+
+    color:#555;
 }
+
+.closeBtn:hover{
+    color:red;
+}
+
+/* =====================
+    FORM
+===================== */
 
 form{
     display:flex;
@@ -117,10 +158,114 @@ form{
 }
 
 form input{
-    padding:10px;
+    padding:12px;
+
+    border:1px solid #ccc;
+
+    border-radius:5px;
+
+    font-size:15px;
+
+    outline:none;
 }
 
-form button{
+form input:focus{
+    border-color:#007bff;
+}
+
+/* =====================
+    FORM BUTTONS
+===================== */
+
+.form-actions{
+    display:flex;
+
+    gap:10px;
+}
+
+/* =====================
+    SAVE BUTTON
+===================== */
+
+#submitBtn{
+    flex:1;
+
     background:green;
+
     color:white;
+
+    font-weight:bold;
+}
+
+#submitBtn:hover{
+    background:darkgreen;
+}
+
+/* =====================
+    CANCEL BUTTON
+===================== */
+
+#cancelBtn{
+    flex:1;
+
+    background:red;
+
+    color:white;
+
+    font-weight:bold;
+}
+
+#cancelBtn:hover{
+    background:darkred;
+}
+
+/* =====================
+    RESPONSIVE
+===================== */
+
+@media(max-width:768px){
+
+    .statistics{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .modal-content{
+        width:90%;
+    }
+
+    table{
+        font-size:14px;
+    }
+
+    h1{
+        font-size:32px;
+    }
+
+}
+
+/* =====================
+    ACTION BUTTON
+===================== */
+
+.editBtn{
+    background:orange;
+
+    color:white;
+
+    margin-right:5px;
+}
+
+.editBtn:hover{
+    background:darkorange;
+}
+
+.deleteBtn{
+    background:red;
+
+    color:white;
+}
+
+.deleteBtn:hover{
+    background:darkred;
 }

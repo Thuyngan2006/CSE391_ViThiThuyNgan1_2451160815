@@ -1,4 +1,4 @@
-let students = [];
+let students = JSON.parse(localStorage.getItem("students")) || [];
 
 let editIndex = null;
 /* =========================
@@ -106,7 +106,8 @@ function deleteStudent(index){
     if(confirmDelete){
 
         students.splice(index, 1);
-
+        saveStudents();
+        updateStatistics();
         renderStudents();
 
         message.innerText =
@@ -115,12 +116,16 @@ function deleteStudent(index){
     }
 
 }
-
+const studentForm =
+    document.getElementById("studentForm");
 const studentTableBody =
     document.getElementById("studentTableBody");
 const openModalBtn = document.getElementById("openModalBtn");
 
 const closeModalBtn = document.getElementById("closeModalBtn");
+
+const cancelBtn =
+    document.getElementById("cancelBtn");
 
 const studentModal = document.getElementById("studentModal");
 
@@ -227,7 +232,8 @@ studentForm.addEventListener("submit", function(e){
     }
 
     renderStudents();
-
+    updateStatistics();
+    saveStudents();
     resetForm();
 
     studentModal.style.display = "none";
@@ -235,3 +241,71 @@ studentForm.addEventListener("submit", function(e){
 });
 
 renderStudents();
+updateStatistics();
+
+/* =========================
+    LƯU LOCAL STORAGE
+========================= */
+
+function saveStudents(){
+
+    localStorage.setItem(
+        "students",
+        JSON.stringify(students)
+    );
+
+}
+
+/* =========================
+    CẬP NHẬT THỐNG KÊ
+========================= */
+
+function updateStatistics(){
+
+    /* TỔNG SINH VIÊN */
+
+    totalStudents.innerText =
+        students.length;
+
+    /* KHÔNG CÓ DỮ LIỆU */
+
+    if(students.length === 0){
+
+        avgScore.innerText = 0;
+
+        return;
+    }
+
+    /* TÍNH ĐIỂM TB */
+
+    let total = 0;
+
+    students.forEach(function(student){
+
+        total += Number(student.score);
+
+    });
+
+    const average =
+        total / students.length;
+
+    avgScore.innerText =
+        average.toFixed(2);
+
+}
+
+/* =========================
+    THÔNG BÁO
+========================= */
+
+function showMessage(text){
+
+    message.innerText = text;
+
+    setTimeout(function(){
+
+        message.innerText = "";
+
+    }, 3000);
+
+}
