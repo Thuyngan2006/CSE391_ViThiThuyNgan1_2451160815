@@ -1,3 +1,123 @@
+let students = [];
+
+let editIndex = null;
+/* =========================
+    HIỂN THỊ DANH SÁCH
+========================= */
+
+function renderStudents(){
+
+    studentTableBody.innerHTML = "";
+
+    /* KHÔNG CÓ DỮ LIỆU */
+
+    if(students.length === 0){
+
+        studentTableBody.innerHTML = `
+            <tr>
+                <td colspan="7">
+                    Chưa có sinh viên nào
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    /* CÓ DỮ LIỆU */
+
+    students.forEach(function(student, index){
+
+        studentTableBody.innerHTML += `
+
+            <tr>
+
+                <td>${student.id}</td>
+
+                <td>${student.name}</td>
+
+                <td>${student.birth}</td>
+
+                <td>${student.className}</td>
+
+                <td>${student.score}</td>
+
+                <td>${student.email}</td>
+
+                <td>
+
+                    <button
+                        class="editBtn"
+                        onclick="editStudent(${index})">
+
+                        Sửa
+
+                    </button>
+
+                    <button
+                        class="deleteBtn"
+                        onclick="deleteStudent(${index})">
+
+                        Xóa
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+function editStudent(index){
+
+    editIndex = index;
+
+    const student = students[index];
+
+    studentId.value = student.id;
+
+    fullName.value = student.name;
+
+    birthDate.value = student.birth;
+
+    className.value = student.className;
+
+    score.value = student.score;
+
+    email.value = student.email;
+
+    studentModal.style.display = "block";
+
+}
+
+/* =========================
+    XÓA SINH VIÊN
+========================= */
+
+function deleteStudent(index){
+
+    const confirmDelete =
+        confirm("Bạn có chắc muốn xóa?");
+
+    if(confirmDelete){
+
+        students.splice(index, 1);
+
+        renderStudents();
+
+        message.innerText =
+            "Xóa sinh viên thành công";
+
+    }
+
+}
+
+const studentTableBody =
+    document.getElementById("studentTableBody");
 const openModalBtn = document.getElementById("openModalBtn");
 
 const closeModalBtn = document.getElementById("closeModalBtn");
@@ -53,7 +173,7 @@ const email = document.getElementById("email");
 function resetForm(){
 
     studentForm.reset();
-
+     editIndex = null;
 }
 
 /* =========================
@@ -91,13 +211,27 @@ studentForm.addEventListener("submit", function(e){
         email: email.value
 
     };
+     if(editIndex === null){
 
-    console.log(student);
+        students.push(student);
 
-    message.innerText = "Lấy dữ liệu thành công";
+        message.innerText = "Thêm sinh viên thành công";
+
+    }
+    else{
+
+        students[editIndex] = student;
+
+        message.innerText = "Cập nhật sinh viên thành công";
+
+    }
+
+    renderStudents();
 
     resetForm();
 
     studentModal.style.display = "none";
 
 });
+
+renderStudents();
