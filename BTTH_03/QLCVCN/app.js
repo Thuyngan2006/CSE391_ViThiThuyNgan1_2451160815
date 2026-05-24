@@ -89,3 +89,171 @@ cancelBtn.addEventListener(
 
     }
 );
+
+/* =========================
+    MẢNG DỮ LIỆU
+========================= */
+
+let tasks = [];
+
+/* =========================
+    FORM
+========================= */
+
+const taskForm =
+    document.getElementById("taskForm");
+
+const taskTitle =
+    document.getElementById("taskTitle");
+
+const taskDescription =
+    document.getElementById("taskDescription");
+
+const taskDeadline =
+    document.getElementById("taskDeadline");
+
+const taskPriority =
+    document.getElementById("taskPriority");
+
+/* =========================
+    HIỂN THỊ DANH SÁCH
+========================= */
+
+function renderTasks(){
+
+    taskList.innerHTML = "";
+
+    /* KHÔNG CÓ DỮ LIỆU */
+
+    if(tasks.length === 0){
+
+        taskList.innerHTML = `
+
+            <h3>
+
+                Chưa có công việc nào
+
+            </h3>
+
+        `;
+
+        return;
+    }
+
+    /* CÓ DỮ LIỆU */
+
+    tasks.forEach(function(task, index){
+
+        taskList.innerHTML += `
+
+            <div class="task-card">
+
+                <h3>
+
+                    ${task.title}
+
+                </h3>
+
+                <p>
+
+                    ${task.description}
+
+                </p>
+
+                <p>
+
+                    Hạn:
+                    ${task.deadline}
+
+                </p>
+
+                <p>
+
+                    Ưu tiên:
+                    ${task.priority}
+
+                </p>
+
+                <p>
+
+                    Trạng thái:
+                    Chưa hoàn thành
+
+                </p>
+
+                <div class="task-actions">
+
+                    <button class="editBtn">
+
+                        Sửa
+
+                    </button>
+
+                    <button class="deleteBtn">
+
+                        Xóa
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+/* =========================
+    SUBMIT FORM
+========================= */
+
+taskForm.addEventListener(
+    "submit",
+    function(e){
+
+        e.preventDefault();
+
+        /* TẠO OBJECT */
+
+        const task = {
+
+            title: taskTitle.value,
+
+            description:
+                taskDescription.value,
+
+            deadline:
+                taskDeadline.value,
+
+            priority:
+                taskPriority.value
+
+        };
+
+        /* THÊM MẢNG */
+
+        tasks.push(task);
+
+        /* RENDER */
+
+        renderTasks();
+
+        /* ĐÓNG MODAL */
+
+        taskModal.style.display =
+            "none";
+
+        /* RESET FORM */
+
+        taskForm.reset();
+
+    }
+);
+
+/* =========================
+    CHẠY LẦN ĐẦU
+========================= */
+
+renderTasks();
