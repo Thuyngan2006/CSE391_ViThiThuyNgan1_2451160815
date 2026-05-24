@@ -55,9 +55,24 @@ const taskPriority =
     DATA
 ========================= */
 
-let tasks = [];
+let tasks = JSON.parse(
+        localStorage.getItem("tasks")
+    ) || [];
 
 let editIndex = null;
+
+/* =========================
+    LƯU LOCAL STORAGE
+========================= */
+
+function saveTasks(){
+
+    localStorage.setItem(
+        "tasks",
+        JSON.stringify(tasks)
+    );
+
+}
 
 /* =========================
     MỞ MODAL
@@ -215,6 +230,57 @@ function renderTasks(){
 
 }
 
+
+/* =========================
+    XÓA CÔNG VIỆC
+========================= */
+
+function deleteTask(index){
+
+    const confirmDelete =
+        confirm("Bạn có chắc muốn xóa?");
+
+    if(confirmDelete){
+
+        tasks.splice(index, 1);
+
+        renderTasks();
+
+        updateTaskSummary();
+
+        saveTasks();
+
+        showMessage(
+            "Xóa công việc thành công"
+        );
+
+    }
+
+}
+
+/* =========================
+    ĐỔI TRẠNG THÁI
+========================= */
+
+function toggleTask(index){
+
+    tasks[index].completed =
+        !tasks[index].completed;
+
+    renderTasks();
+
+    updateTaskSummary();
+
+    saveTasks();
+
+}
+
+/* =========================
+    CHẠY LẦN ĐẦU
+========================= */
+
+
+
 /* =========================
     SUBMIT FORM
 ========================= */
@@ -249,6 +315,10 @@ taskForm.addEventListener(
 
             tasks.push(task);
 
+            showMessage(
+                "Thêm công việc thành công"
+            );
+
         }
 
         /* CẬP NHẬT */
@@ -260,9 +330,17 @@ taskForm.addEventListener(
 
             tasks[editIndex] = task;
 
+            showMessage(
+                "Cập nhật công việc thành công"
+            );
+
         }
 
         renderTasks();
+
+        updateTaskSummary();
+
+        saveTasks();
 
         resetForm();
 
@@ -310,41 +388,59 @@ function editTask(index){
         "block";
 
 }
+    
 
 /* =========================
-    XÓA CÔNG VIỆC
+    CẬP NHẬT THỐNG KÊ
 ========================= */
 
-function deleteTask(index){
+function updateTaskSummary(){
 
-    const confirmDelete =
-        confirm("Bạn có chắc muốn xóa?");
+    /* TỔNG CÔNG VIỆC */
 
-    if(confirmDelete){
+    totalTasks.innerText =
+        tasks.length;
 
-        tasks.splice(index, 1);
+    /* ĐÃ HOÀN THÀNH */
 
-        renderTasks();
+    let completed = 0;
 
-    }
+    tasks.forEach(function(task){
+
+        if(task.completed){
+
+            completed++;
+
+        }
+
+    });
+
+    completedTasks.innerText =
+        completed;
+
+    /* CHƯA HOÀN THÀNH */
+
+    pendingTasks.innerText =
+        tasks.length - completed;
 
 }
 
 /* =========================
-    ĐỔI TRẠNG THÁI
+    THÔNG BÁO
 ========================= */
 
-function toggleTask(index){
+function showMessage(text){
 
-    tasks[index].completed =
-        !tasks[index].completed;
+    message.innerText = text;
 
-    renderTasks();
+    setTimeout(function(){
+
+        message.innerText = "";
+
+    }, 3000);
 
 }
-
-/* =========================
-    CHẠY LẦN ĐẦU
-========================= */
 
 renderTasks();
+
+updateTaskSummary();
