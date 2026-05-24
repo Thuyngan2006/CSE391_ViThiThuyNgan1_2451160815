@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Quản Lý Công Việc</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- =====================
+        CONTAINER
+    ====================== -->
+
+    <div class="container">
+
+        <!-- =====================
+            TITLE
+        ====================== -->
+
+        <h1>
+
+            Quản Lý Công Việc Cá Nhân
+
+        </h1>
+
+        <!-- =====================
+            TOP BAR
+        ====================== -->
+
+        <div class="top-bar">
+
+            <button id="openModalBtn">
+
+                + Thêm Công Việc
+
+            </button>
+
+        </div>
+
+        <!-- =====================
+            MESSAGE
+        ====================== -->
+
+        <div id="message">
+
+            Chào mừng bạn đến ứng dụng
+
+        </div>
+
+        <!-- =====================
+            STATISTICS
+        ====================== -->
+
+        <div class="statistics">
+
+            <div>
+
+                Tổng công việc:
+                <span id="totalTasks">
+
+                    0
+
+                </span>
+
+            </div>
+
+            <div>
+
+                Đã hoàn thành:
+                <span id="completedTasks">
+
+                    0
+
+                </span>
+
+            </div>
+
+            <div>
+
+                Chưa hoàn thành:
+                <span id="pendingTasks">
+
+                    0
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- =====================
+            TASK LIST
+        ====================== -->
+
+        <div id="taskList">
+
+            <!-- Card công việc sẽ hiển thị ở đây -->
+
+        </div>
+
+    </div>
+
+    <!-- =====================
+        MODAL
+    ====================== -->
+
+    <div class="modal"
+         id="taskModal">
+
+        <div class="modal-content">
+
+            <!-- CLOSE -->
+
+            <span class="closeBtn"
+                  id="closeModalBtn">
+
+                &times;
+
+            </span>
+
+            <!-- TITLE -->
+
+            <h2 id="modalTitle">
+
+                Thêm Công Việc
+
+            </h2>
+
+            <!-- FORM -->
+
+            <form id="taskForm">
+
+                <!-- TASK TITLE -->
+
+                <input type="text"
+                       id="taskTitle"
+                       placeholder="Tiêu đề công việc"
+                       required>
+
+                <!-- DESCRIPTION -->
+
+                <input type="text"
+                       id="taskDescription"
+                       placeholder="Mô tả ngắn"
+                       required>
+
+                <!-- DEADLINE -->
+
+                <input type="date"
+                       id="taskDeadline"
+                       required>
+
+                <!-- PRIORITY -->
+
+                <select id="taskPriority">
+
+                    <option value="Cao">
+
+                        Ưu tiên cao
+
+                    </option>
+
+                    <option value="Trung Bình">
+
+                        Ưu tiên trung bình
+
+                    </option>
+
+                    <option value="Thấp">
+
+                        Ưu tiên thấp
+
+                    </option>
+
+                </select>
+
+                <!-- BUTTON -->
+
+                <div class="form-actions">
+
+                    <button type="submit"
+                            id="submitBtn">
+
+                        Lưu
+
+                    </button>
+
+                    <button type="button"
+                            id="cancelBtn">
+
+                        Hủy
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
