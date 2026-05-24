@@ -274,3 +274,72 @@ form select{
 
     font-weight:bold;
 }
+/* =====================
+    TASK CARD
+===================== */
+
+.task-card{
+    background:white;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    padding:20px;
+
+    box-shadow:0 0 5px rgba(0,0,0,0.1);
+}
+
+/* =====================
+    COMPLETED
+===================== */
+
+.completed{
+    opacity:0.7;
+
+    background:#e9f7ef;
+}
+
+/* =====================
+    TASK ACTIONS
+===================== */
+
+.task-actions{
+    margin-top:15px;
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+/* =====================
+    COMPLETE BUTTON
+===================== */
+
+.completeBtn{
+    background:green;
+
+    color:white;
+}
+
+/* =====================
+    EDIT BUTTON
+===================== */
+
+.editBtn{
+    background:orange;
+
+    color:white;
+}
+
+/* =====================
+    DELETE BUTTON
+===================== */
+
+.deleteBtn{
+    background:red;
+
+    color:white;
+}

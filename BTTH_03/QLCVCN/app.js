@@ -1,5 +1,5 @@
 /* =========================
-    LẤY DOM
+    DOM
 ========================= */
 
 const openModalBtn =
@@ -33,20 +33,31 @@ const taskList =
     document.getElementById("taskList");
 
 /* =========================
-    THAY ĐỔI NỘI DUNG
+    FORM
 ========================= */
 
-modalTitle.innerText =
-    "Form Quản Lý Công Việc";
+const taskForm =
+    document.getElementById("taskForm");
 
-message.innerText =
-    "Chào mừng bạn đến hệ thống quản lý công việc";
+const taskTitle =
+    document.getElementById("taskTitle");
 
-totalTasks.innerText = 0;
+const taskDescription =
+    document.getElementById("taskDescription");
 
-completedTasks.innerText = 0;
+const taskDeadline =
+    document.getElementById("taskDeadline");
 
-pendingTasks.innerText = 0;
+const taskPriority =
+    document.getElementById("taskPriority");
+
+/* =========================
+    DATA
+========================= */
+
+let tasks = [];
+
+let editIndex = null;
 
 /* =========================
     MỞ MODAL
@@ -84,36 +95,13 @@ cancelBtn.addEventListener(
     "click",
     function(){
 
+        resetForm();
+
         taskModal.style.display =
             "none";
 
     }
 );
-
-/* =========================
-    MẢNG DỮ LIỆU
-========================= */
-
-let tasks = [];
-
-/* =========================
-    FORM
-========================= */
-
-const taskForm =
-    document.getElementById("taskForm");
-
-const taskTitle =
-    document.getElementById("taskTitle");
-
-const taskDescription =
-    document.getElementById("taskDescription");
-
-const taskDeadline =
-    document.getElementById("taskDeadline");
-
-const taskPriority =
-    document.getElementById("taskPriority");
 
 /* =========================
     HIỂN THỊ DANH SÁCH
@@ -146,7 +134,9 @@ function renderTasks(){
 
         taskList.innerHTML += `
 
-            <div class="task-card">
+            <div class="task-card
+                ${task.completed ? "completed" : ""}
+            ">
 
                 <h3>
 
@@ -177,19 +167,39 @@ function renderTasks(){
                 <p>
 
                     Trạng thái:
-                    Chưa hoàn thành
+                    ${
+                        task.completed
+                        ? "Đã hoàn thành"
+                        : "Chưa hoàn thành"
+                    }
 
                 </p>
 
                 <div class="task-actions">
 
-                    <button class="editBtn">
+                    <button
+                        class="completeBtn"
+                        onclick="toggleTask(${index})">
+
+                        ${
+                            task.completed
+                            ? "Hoàn tác"
+                            : "Hoàn thành"
+                        }
+
+                    </button>
+
+                    <button
+                        class="editBtn"
+                        onclick="editTask(${index})">
 
                         Sửa
 
                     </button>
 
-                    <button class="deleteBtn">
+                    <button
+                        class="deleteBtn"
+                        onclick="deleteTask(${index})">
 
                         Xóa
 
@@ -215,11 +225,10 @@ taskForm.addEventListener(
 
         e.preventDefault();
 
-        /* TẠO OBJECT */
-
         const task = {
 
-            title: taskTitle.value,
+            title:
+                taskTitle.value,
 
             description:
                 taskDescription.value,
@@ -228,29 +237,111 @@ taskForm.addEventListener(
                 taskDeadline.value,
 
             priority:
-                taskPriority.value
+                taskPriority.value,
+
+            completed:false
 
         };
 
-        /* THÊM MẢNG */
+        /* THÊM */
 
-        tasks.push(task);
+        if(editIndex === null){
 
-        /* RENDER */
+            tasks.push(task);
+
+        }
+
+        /* CẬP NHẬT */
+
+        else{
+
+            task.completed =
+                tasks[editIndex].completed;
+
+            tasks[editIndex] = task;
+
+        }
 
         renderTasks();
 
-        /* ĐÓNG MODAL */
+        resetForm();
 
         taskModal.style.display =
             "none";
 
-        /* RESET FORM */
-
-        taskForm.reset();
-
     }
 );
+
+/* =========================
+    RESET FORM
+========================= */
+
+function resetForm(){
+
+    taskForm.reset();
+
+    editIndex = null;
+
+}
+
+/* =========================
+    SỬA CÔNG VIỆC
+========================= */
+
+function editTask(index){
+
+    editIndex = index;
+
+    const task = tasks[index];
+
+    taskTitle.value =
+        task.title;
+
+    taskDescription.value =
+        task.description;
+
+    taskDeadline.value =
+        task.deadline;
+
+    taskPriority.value =
+        task.priority;
+
+    taskModal.style.display =
+        "block";
+
+}
+
+/* =========================
+    XÓA CÔNG VIỆC
+========================= */
+
+function deleteTask(index){
+
+    const confirmDelete =
+        confirm("Bạn có chắc muốn xóa?");
+
+    if(confirmDelete){
+
+        tasks.splice(index, 1);
+
+        renderTasks();
+
+    }
+
+}
+
+/* =========================
+    ĐỔI TRẠNG THÁI
+========================= */
+
+function toggleTask(index){
+
+    tasks[index].completed =
+        !tasks[index].completed;
+
+    renderTasks();
+
+}
 
 /* =========================
     CHẠY LẦN ĐẦU
