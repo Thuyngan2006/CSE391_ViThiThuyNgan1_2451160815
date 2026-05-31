@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Thuy Ngan</h1>
+
+<div class="gallery">
+
+    <button id="prevBtn" aria-label="Previous Image">
+        ◀
+    </button>
+
+    <img
+        id="galleryImage"
+        src="https://picsum.photos/id/1015/600/350"
+        alt="Gallery Image"
+    >
+
+    <button id="nextBtn" aria-label="Next Image">
+        ▶
+    </button>
+
+</div>
+
+<div class="help">
+    ← → : Change Image |
+    1-9 : Jump Image |
+    Space : Play/Pause |
+    Ctrl+K : Command Palette
+</div>
+
+<div id="palette" class="palette">
+
+    <div class="palette-box">
+
+        <input
+            type="text"
+            id="commandInput"
+            placeholder="Type command..."
+            aria-label="Command Search"
+        >
+
+        <ul id="commandList"></ul>
+
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
